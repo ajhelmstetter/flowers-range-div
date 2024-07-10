@@ -24,6 +24,8 @@ devtools::load_all(here::here())
 
 # You can list global variables here (or in a separate R script)
 
+# Copy cleaned_trees.rds from tree_and_traits repo
+# Copy species_with_ranges.rds from gbif-bulk repo
 
 ## Run Project ----
 
