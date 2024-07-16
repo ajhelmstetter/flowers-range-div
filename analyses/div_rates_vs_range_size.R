@@ -21,7 +21,7 @@ dr_df$species <- gsub("_"," ",dr_df$species)
 # ---- Plot per-tree range size vs DR ----
 ####
 
-pdf("figures/range_size_vs_dr.pdf")
+pdf("figures/range_size_aoo_vs_dr.pdf")
 
 for(i in 1:length(cleaned_trees)){
   
@@ -45,7 +45,7 @@ for(i in 1:length(cleaned_trees)){
   
   #duplicates will still be included
   tree_range_df <- merge(tree_range,tree_dr,by="species")
-  tree_range_df$log_range_size <- log(tree_range_df$range_size)
+  tree_range_df$log_range_size <- log(tree_range_df$range_size) # NOTE: CAN CHANGE TO OTHER RANGE SIZES
   
   # make linear model
   mod <- summary(lm(tree_range_df$log_range_size~tree_range_df$dr))
@@ -57,7 +57,7 @@ for(i in 1:length(cleaned_trees)){
     geom_smooth(method=lm , color="darkblue", alpha=0.4, fill="#69b3a2", se=TRUE) + 
     annotate("text", x = -Inf, y = Inf, label = unique(dr_df$tree)[i], hjust = -.2, vjust = 2) +
     annotate("text", x = -Inf, y = Inf, label = paste("No. species = ", length(unique(tree_range_df$species))), hjust = -.4, vjust = 4) +
-      annotate("text", x = -Inf, y = Inf, label = paste("adj r2 =", round(mod$adj.r.squared,3),"p-value =",round(mod$coefficients[2,4],3)), hjust = -.2, vjust = 6) +
+    annotate("text", x = -Inf, y = Inf, label = paste("adj r2 =", round(mod$adj.r.squared,3),"p-value =",round(mod$coefficients[2,4],3)), hjust = -.2, vjust = 6) +
     theme_minimal()
   )
 
